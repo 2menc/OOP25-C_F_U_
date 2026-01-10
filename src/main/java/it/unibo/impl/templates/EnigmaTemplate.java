@@ -5,6 +5,9 @@ import java.util.List;
 
 import it.unibo.api.enigmas.Enigma;
 
+/**
+ * an implementation of {@link Enigma}
+ */
 public class EnigmaTemplate implements Enigma{
 
     private final String id;
@@ -15,6 +18,14 @@ public class EnigmaTemplate implements Enigma{
     private final String correctOption;
     private final List<String> options;
 
+    /**
+     * constructor
+     * @param id enigm's id
+     * @param keyInside if this enigm has to return a key when completed
+     * @param question the question
+     * @param options the answers
+     * @param correctOption the correct answer
+     */
     public EnigmaTemplate(final String id, final boolean keyInside, 
         final String question, final List<String> options, final String correctOption
     ) {

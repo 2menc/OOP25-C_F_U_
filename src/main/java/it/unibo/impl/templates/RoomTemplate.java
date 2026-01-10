@@ -10,7 +10,7 @@ import it.unibo.api.rooms.Room;
 import it.unibo.api.rooms.RoomCellsValues;
 
 /**
- * an abstract implementation of {@link Room}
+ * an implementation of {@link Room}
  */
 public class RoomTemplate implements Room{
 
