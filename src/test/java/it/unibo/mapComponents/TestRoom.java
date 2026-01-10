@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,9 @@ import it.unibo.impl.templates.RoomTemplate;
 public class TestRoom {
 
     private Room room;
+    Map<Position, Enigma> enigmaMap = this.initializeEnigmMap();
+    Map<Position, Door> doorMap = this.initializeDoorMap();
+
 
     @BeforeEach
     void init() {
@@ -28,8 +33,8 @@ public class TestRoom {
 
     @Test
     void testRoomGeneration() {
-        final Map<Position, Enigma> enigmaMap = this.initializeEnigmMap();
-        final Map<Position, Door> doorMap = this.initializeDoorMap();
+        this.enigmaMap = this.initializeEnigmMap();
+        this.doorMap = this.initializeDoorMap();
         
         this.room.setLayout(4, doorMap, enigmaMap);
     
@@ -37,6 +42,19 @@ public class TestRoom {
             assertEquals(pos, room.getEnigmaPosition(enigmaMap.get(pos)));
         }
     }
+
+    @Test
+    void testExeptionsThrowing() {
+        this.doorMap = new HashMap<>();
+        this.doorMap.put(new Position(90, 54), new DoorImpl("testId", new RoomTemplate("testId")));
+
+        this.enigmaMap = new HashMap<>();
+        this.enigmaMap.put(new Position(90, 54), new EnigmaTemplate("testId", false, "q", List.of("1"), "1"));
+
+        assertThrows(IllegalArgumentException.class, (() -> this.room.setLayout(3, doorMap, enigmaMap)));
+
+    }
+
 
     private Map<Position, Enigma> initializeEnigmMap() {
         final Map<Position, Enigma> enigmaMap = new HashMap<>();
