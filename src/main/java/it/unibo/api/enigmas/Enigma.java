@@ -11,7 +11,7 @@ public interface Enigma {
      * gets the id of this enigm
      * @return the id
      */
-    int getId();
+    String getId();
 
     /**
      * tells if the enigm is completed
