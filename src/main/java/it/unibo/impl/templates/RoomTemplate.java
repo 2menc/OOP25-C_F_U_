@@ -1,4 +1,4 @@
-package it.unibo.api.templates;
+package it.unibo.impl.templates;
 
 import java.util.HashMap;
 import java.util.Map;
