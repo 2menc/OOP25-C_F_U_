@@ -139,12 +139,7 @@ public class RoomTemplate implements Room{
         return count;
     }
 
-    /**
-     * generates a Room implementation with the given layout
-     * @param size the size of the room (square) 
-     * @param doorMap a map of every door position
-     * @param enigmaMap a map of every enigma position
-     */
+    @Override
     public void setLayout(final int size, 
         final Map<Position, Door> doorMap, final Map<Position, Enigma> enigmaMap
         ) {
