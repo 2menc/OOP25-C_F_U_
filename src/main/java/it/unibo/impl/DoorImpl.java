@@ -9,7 +9,7 @@ import it.unibo.api.rooms.Room;
 public class DoorImpl implements Door{
 
     private final String id;
-    private final Room dsrRoom;
+    private final Room dstRoom;
     private boolean open;
 
     /**
@@ -18,7 +18,7 @@ public class DoorImpl implements Door{
      * @param dstRoom the destination {@link Room}
      */
     public DoorImpl(final String id, final Room dstRoom) {
-        this.dsrRoom = dstRoom;
+        this.dstRoom = dstRoom;
         this.open = false;
         this.id = id;
     }
@@ -35,7 +35,7 @@ public class DoorImpl implements Door{
 
     @Override
     public Room getDstRoom() {
-        return this.dsrRoom;
+        return this.dstRoom;
     }
 
     @Override
