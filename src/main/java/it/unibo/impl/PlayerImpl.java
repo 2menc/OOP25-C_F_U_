@@ -27,7 +27,7 @@ public class PlayerImpl implements Player{
     }
 
     @Override
-    public Integer getPoints() {
+    public int getPoints() {
         return this.score;
     }
 

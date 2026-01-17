@@ -1,41 +1,52 @@
 package it.unibo.impl;
 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import it.unibo.api.key.Key;
 
-public class Inventory {
-    private final Map<Integer, Key> keys;
 
+public class Inventory {
+    private final List<Key> keys;
+
+    /**
+     * constructor
+     */
     public Inventory(){
-        this.keys=new HashMap<>();
+        this.keys=new ArrayList<>();
     }
 
     /**
      * @return the map of the keys
-     * unmodifiableMap!!!!!!!!!!!!!!!!!!
      */
-    public Map<Integer, Key> getKeys(){
-        return this.keys;
+    public List<Key> getKeys(){
+        return new ArrayList<Key>(keys);
     }
 
     /**
-     * @param k the key taht the player found
+     * add an obj Key to the list
+     * @param opt optional param key
      */
-    public void addKey(Key k){
-        if(k!=null){
-            this.keys.put(k.getId(), k);
-            System.out.println("You collected: "+k.getName());
+    public void addKey(Optional<Key> opt){
+        if(! opt.isEmpty()){
+            this.keys.add(opt.get());
+            System.out.println("You collected: "+opt.get().getName());
         }
     }
 
     /**
-     * @param keyId
+     * search in the list of the keys if there is a specific key
+     * @param keyId the id of the key you are looking for
      * @return true if the key is in the inventory false if it is not
      */
-    public boolean hasTheKey(Integer keyId){
-        return this.keys.containsKey(keyId);
+    public boolean hasTheKey(String keyId){
+        for(Key k:this.keys){
+            if(k.getId().equals(keyId)){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -26,5 +26,5 @@ public interface Player {
     /**
      * @return the current points of the player
      */
-    Integer getPoints();
+    int getPoints();
 }

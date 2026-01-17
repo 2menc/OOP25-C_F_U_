@@ -19,24 +19,28 @@ public interface RoomManager {
      */
     Room getCurrentRoom();
 
+   
     /**
      * checks if the cell in wich the player wants to move is free or has an {@link RoomCellsValues} parameter
+     * @param nextPosition the position the player wants to go to
      * @return {@code true} if the cell is {@link RoomCellsValues}.free
      */
-    boolean isPlayerColliding();
+    boolean isPlayerColliding(Position nextPosition);
 
+    
     /**
      * performs the move
+     * @param nexPosition the position the player want to go to
      * @param canMove false if the player is blocked
      * @return the new position
      */
-    Position computeMove(boolean canMove);
+    void computeMove(boolean canMove, Position nexPosition);
 
     /**
      * checks if the player is about to enter an event (door, enigm)
      * @return {@code true} if the player is entering an event, {@code false} otherwise
      */
-    boolean isEnteringAnEvent();
+    boolean isEnteringAnEvent(Position nexPosition);
 
 
 
