@@ -25,7 +25,7 @@ public interface RoomManager {
      * @param nextPosition the position the player wants to go to
      * @return {@code true} if the cell is {@link RoomCellsValues}.free
      */
-    boolean isPlayerColliding(Position nextPosition);
+    boolean isPlayerColliding(final Position nextPosition);
 
     
     /**
@@ -34,7 +34,7 @@ public interface RoomManager {
      * @param canMove false if the player is blocked
      * @return the new position
      */
-    void computeMove(boolean canMove, Position nexPosition);
+    void computeMove(boolean canMove, final Position nexPosition);
 
     /**
      * checks if the player is about to enter an event (door, enigm)

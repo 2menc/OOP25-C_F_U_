@@ -1,7 +1,5 @@
 package it.unibo.impl;
 
-import java.util.Optional;
-
 import it.unibo.api.Position;
 import it.unibo.api.player.Player;
 import it.unibo.api.rooms.Room;
@@ -34,36 +32,40 @@ public class RoomManagerImpl implements RoomManager{
     }
 
     @Override
-    public boolean isPlayerColliding(Position nexPosition) {
-        if(!Optional.ofNullable(player).isEmpty() || !Optional.ofNullable(currentRoom).isEmpty()){
-           if(currentRoom.getCellContent(nexPosition) == RoomCellsValues.FREE){
-                return true;
-           }else{
-                return false;
-           }
+    public boolean isPlayerColliding(final Position nexPosition) {
+        if(currentRoom.getCellContent(nexPosition) == RoomCellsValues.FREE){
+            return true;
+        }else{
+            return false;
         }
-        throw new IllegalStateException("no player/room");
     }
 
     @Override
-    public void computeMove(boolean canMove, Position nexPosition) {
+    public void computeMove(boolean canMove, final Position nexPosition) {
         if(canMove){
             this.player.move(nexPosition);
-        }else{
-            this.player.move(this.player.getPosition());
         }
     }
 
     @Override
-    public boolean isEnteringAnEvent(Position nexPosition) {
-        if(!Optional.ofNullable(player).isEmpty() || !Optional.ofNullable(currentRoom).isEmpty()){
-            if(this.currentRoom.getCellContent(nexPosition) == RoomCellsValues.ENIGMA || this.currentRoom.getCellContent(nexPosition) == RoomCellsValues.DOOR){
-                 return true;
-            }else{
-                 return false;
-            }
-         }
-         throw new IllegalStateException("no player/room");
+    public boolean isEnteringAnEvent(final Position nexPosition) {
+        if(this.currentRoom.getCellContent(nexPosition) == RoomCellsValues.ENIGMA){
+            enterEnigma();
+            return true;
+        }else if(this.currentRoom.getCellContent(nexPosition) == RoomCellsValues.DOOR){
+            enterDoor();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private void enterDoor(){
+        //TODO
+    }
+
+    private void enterEnigma(){ 
+        //TODO
     }
 }
 

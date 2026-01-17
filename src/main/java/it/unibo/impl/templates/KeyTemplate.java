@@ -1,7 +1,5 @@
 package it.unibo.impl.templates;
 
-import java.util.Optional;
-
 import it.unibo.api.doors.Door;
 import it.unibo.api.key.Key;
 
@@ -45,8 +43,6 @@ public class KeyTemplate implements Key{
 
     @Override
     public void openDoor() {
-       if(!Optional.ofNullable(this.destination).isEmpty()){
             this.destination.setOpen(true);
-       }
     }
 }
