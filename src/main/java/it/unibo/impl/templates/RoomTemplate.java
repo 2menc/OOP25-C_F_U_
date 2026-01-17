@@ -175,5 +175,15 @@ public class RoomTemplate implements Room{
             }
         }
     }
+
+    @Override
+    public Door getDoor(Position pos) {
+        return this.doorGrid.get(pos);
+    }
+
+    @Override
+    public Enigma getEnigma(Position pos) {
+        return this.enigmaGrid.get(pos);
+    }
     
 }

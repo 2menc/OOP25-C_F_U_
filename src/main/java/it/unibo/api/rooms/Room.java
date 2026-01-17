@@ -38,7 +38,21 @@ public interface Room {
      * @param doorMap a map of every door position
      * @param enigmaMap a map of every enigma position
      */
-    public void setLayout(final int size, 
+    void setLayout(final int size, 
         final Map<Position, Door> doorMap, final Map<Position, Enigma> enigmaMap);
 
+    /**
+     * gets the door in this position
+     * @param pos the position
+     * @return the door
+     */
+    Door getDoor(Position pos);
+
+    
+    /**
+     * gets the enigma in this position
+     * @param pos the position
+     * @return the enigma
+     */
+    Enigma getEnigma(Position pos);
 }
