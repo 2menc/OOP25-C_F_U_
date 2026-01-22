@@ -40,7 +40,7 @@ public interface RoomManager {
      * @param nextPosition the position the player wants to move
      * @return {@code true} if the player is entering an event, {@code false} otherwise
      */
-    boolean isEnteringAnEvent(Position nexPosition);
+    boolean isEnteringAnEvent(Position nextPosition);
 
     /**
      * gets the current player position
