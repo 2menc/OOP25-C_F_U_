@@ -78,5 +78,10 @@ public class RoomManagerImpl implements RoomManager{
                 enterNextRoom(this.currentRoom.getDoor(posDoor).getDstRoom());
         }
     }
+
+    @Override
+    public Position getCurrentPosition() {
+        return this.player.getPosition();
+    }
 }
 

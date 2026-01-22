@@ -42,6 +42,10 @@ public interface RoomManager {
      */
     boolean isEnteringAnEvent(Position nexPosition);
 
-
+    /**
+     * gets the current player position
+     * @return the current position
+     */
+    Position getCurrentPosition();
 
 }
