@@ -7,7 +7,9 @@ import java.util.Optional;
 
 import it.unibo.api.key.Key;
 
-
+/**
+* Inventory system
+*/
 public class Inventory {
     private final List<Key> keys;
 
@@ -19,7 +21,8 @@ public class Inventory {
     }
 
     /**
-     * @return the map of the keys
+     * gets the list of the keys
+     * @return the keys
      */
     public List<Key> getKeys(){
         return new ArrayList<Key>(keys);

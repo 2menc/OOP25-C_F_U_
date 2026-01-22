@@ -14,7 +14,7 @@ public interface Player {
 
     /**
      * update the current position of the player to the next position
-     * @param nextPosition
+     * @param nextPosition the position where the player wants to move
      */
     void move(Position nextPosition);
 
@@ -24,7 +24,8 @@ public interface Player {
     void addPoints();
 
     /**
-     * @return the current points of the player
+     * gets the current points of the player
+     * @return the points
      */
     int getPoints();
 }

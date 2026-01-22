@@ -8,17 +8,20 @@ import it.unibo.api.doors.Door;
 public interface Key {
 
     /**
-     * @return the id of the key
+     * gets  the id of the key
+     * @return the id 
      */
     public String getId();
 
     /**
-     * @return the name of the key
+     * gets the name of the key
+     * @return the name 
     */
     public String getName();
 
     /**
-    * @return the door that the key unlock
+     * gets the door that the key unlock
+    * @return the door 
     */
     public Door getDst();
     
