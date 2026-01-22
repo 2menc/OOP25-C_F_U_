@@ -32,12 +32,12 @@ public interface RoomManager {
      * performs the move
      * @param nexPosition the position the player want to go to
      * @param canMove false if the player is blocked
-     * @return the new position
      */
     void computeMove(boolean canMove, final Position nexPosition);
 
     /**
      * checks if the player is about to enter an event (door, enigm)
+     * @param nextPosition the position the player wants to move
      * @return {@code true} if the player is entering an event, {@code false} otherwise
      */
     boolean isEnteringAnEvent(Position nexPosition);

@@ -16,6 +16,7 @@ public class RoomManagerImpl implements RoomManager{
 
     /**
      * basic constructor
+     * @param player the player
      */
     public RoomManagerImpl(final Player player) {
         this.player=player;
