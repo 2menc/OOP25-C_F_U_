@@ -23,7 +23,7 @@ public interface RoomManager {
     /**
      * checks if the cell in wich the player wants to move is free or has an {@link RoomCellsValues} parameter
      * @param nextPosition the position the player wants to go to
-     * @return {@code true} if the cell is {@link RoomCellsValues}.free
+     * @return {@code false} if the cell is {@link RoomCellsValues}.FREE
      */
     boolean isPlayerColliding(final Position nextPosition);
 

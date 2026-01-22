@@ -35,9 +35,9 @@ public class RoomManagerImpl implements RoomManager{
     @Override
     public boolean isPlayerColliding(final Position nextPosition) {
         if(currentRoom.getCellContent(nextPosition) == RoomCellsValues.FREE){
-            return true;
-        }else{
             return false;
+        }else{
+            return true;
         }
     }
 
