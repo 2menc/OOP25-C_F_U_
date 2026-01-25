@@ -23,7 +23,7 @@ public interface Enigma {
      * tells if this enigm has the key
      * @return  {@code true} if contains the key, {@code false} otherwise
      */
-    boolean hasTheKey();
+    boolean isKeyInside();
 
     /**
      * gets the enigm question 
@@ -43,4 +43,10 @@ public interface Enigma {
      * @return the result
      */
     boolean solve(String answer);
+
+    /**
+     * gets the correct answer
+     * @return the correct answer
+     */
+    String getCorrectOption();
 }

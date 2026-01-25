@@ -1,7 +1,7 @@
 package it.unibo.impl.templates;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import it.unibo.api.enigmas.Enigma;
 
@@ -10,13 +10,18 @@ import it.unibo.api.enigmas.Enigma;
  */
 public class EnigmaTemplate implements Enigma{
 
-    private final String id;
+    private String id;
     private boolean completed;
     private boolean keyInside;
 
-    private final String question;
-    private final String correctOption;
-    private final List<String> options;
+    private String question;
+    private String correctOption;
+    private List<String> options;
+
+    /**
+     * 0 args constructor for snakeYaml
+     */
+    public EnigmaTemplate() {}
 
     /**
      * constructor
@@ -41,38 +46,95 @@ public class EnigmaTemplate implements Enigma{
         this.correctOption = correctOption;
     }
 
+//getters
+
     @Override
     public String getId() {
         return this.id;
     }
-
     @Override
     public boolean isCompleted() {
         return this.completed;
     }
-
     @Override
-    public boolean hasTheKey() {
+    public boolean isKeyInside() {
         return this.keyInside;
     }
-
     @Override
     public String getQuestion() {
         return this.question;
     }
-
     @Override
     public List<String> getOptions() {
-        Collections.shuffle(this.options);
-        return options;
+        return this.options;
     }
-
     @Override
     public boolean solve(String answer) {
         if(answer.equals(this.correctOption)) {
             return true;
         }
         return false;
+    }
+    @Override
+    public String getCorrectOption() {
+        return this.correctOption;
+    }
+
+//
+
+//setters
+
+    /**
+     * sets the enigma's id
+     * @param id the id
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * sets if this enigma has to drop a key when completed
+     * @param hasTheKey {@code true} if this enigma has a key
+     */
+    public void setKeyInside(final boolean hasTheKey) {
+        this.keyInside = hasTheKey;
+    }
+
+    /**
+     * sets this enigma's question
+     * @param question the question
+     */
+    public void setQuestion(final String question) {
+        this.question = question;
+    }
+
+    /**
+     * sets the answers
+     * @param options the answers
+     */
+    public void setOptions(final List<String> options) {
+        this.options = options;
+    }
+
+    /**
+     * sets the correct option
+     * @param correctOption the correct answer
+     */
+    public void setCorrectOption(final String correctOption) {
+        this.correctOption = correctOption;
+    }
+
+//
+
+    /**
+     * necessary in order to tell the tests to not check for memory addresses (for assertEquals)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof EnigmaTemplate)) return false;
+        EnigmaTemplate that = (EnigmaTemplate) obj;
+        return Objects.equals(id, that.id) && Objects.equals(question, that.question);
     }
 
 }
