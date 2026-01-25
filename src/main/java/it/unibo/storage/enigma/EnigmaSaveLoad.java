@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class EnigmaSaveLoad {
 
-    private final static String filePath = "./src/main/java/it/unibo/storage/enigma/enigmas.yml";
+    private final static String filePath = "./src/main/resources/enigmas.yml";
 
     List<Enigma> enigmas = new ArrayList<>();
     
