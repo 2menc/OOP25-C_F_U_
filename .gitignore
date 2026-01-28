@@ -15,6 +15,3 @@ bin/
 
 # Ignore vscode directory
 .vscode/*
-
-# Ignore .yaml save files
-enigmas.yml
