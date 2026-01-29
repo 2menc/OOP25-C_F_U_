@@ -2,6 +2,7 @@ package it.unibo.api.rooms;
 
 import it.unibo.api.Position;
 import it.unibo.api.enigmas.Enigma;
+import it.unibo.impl.Inventory;
 
 /**
  * a simple manager for player movement in the rooms
@@ -20,15 +21,19 @@ public interface RoomManager {
      */
     Room getCurrentRoom();
 
-   
+    /**
+     * gets the inventory
+     * @return the inventory
+     */
+    Inventory getInventory();
+
     /**
      * checks if the cell in wich the player wants to move is free or has an {@link RoomCellsValues} parameter
      * @param nextPosition the position the player wants to go to
      * @return {@code false} if the cell is {@link RoomCellsValues}.FREE
      */
     boolean isPlayerColliding(final Position nextPosition);
-
-    
+  
     /**
      * performs the move
      * @param nexPosition the position the player want to go to

@@ -42,6 +42,16 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
     }
 
     @Override
+    public Position getCurrentPosition() {
+        return this.player.getPosition();
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return this.player.getInventory();
+    }
+
+    @Override
     public boolean isPlayerColliding(final Position nextPosition) {
         if(currentRoom.getCellContent(nextPosition) == RoomCellsValues.FREE){
             return false;
@@ -78,9 +88,5 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
         }
     }
 
-    @Override
-    public Position getCurrentPosition() {
-        return this.player.getPosition();
-    }
 }
 
