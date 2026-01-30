@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class EnigmaSave {
 
-    List<Enigma> enigmas = new ArrayList<>();
+    List<DataForEnigmas> enigmas = new ArrayList<>();
     
     /**
      * 0 args constructor
@@ -57,8 +57,14 @@ public class EnigmaSave {
         loadOpt.setTagInspector(tagInsp);
 
         try(final InputStream fis = new FileInputStream(GameSettings.YAML_FILES_DEFAULT_PATH.getValue())) {
-        final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
-            enigmas = yamlRead.load(fis);
+            final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
+            final List<DataForEnigmas> raw = yamlRead.load(fis);
+
+            raw.stream().forEach(e -> {
+                this.enigmas.add(new DataForEnigmas(e.getId(), e.getQuestion(), 
+                    e.getCorrectOption(), e.getOptions(), e.getDoorIdForThisKey()));
+            });
+
         } catch (final Exception excep) {
             excep.printStackTrace();
         }
@@ -68,7 +74,7 @@ public class EnigmaSave {
      * gets the list of the enigmas in the file
      * @return the list of enigmas
      */
-    public List<Enigma> getEnigmas() {
+    public List<DataForEnigmas> getEnigmas() {
         return this.enigmas;
     }
 }
