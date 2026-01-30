@@ -10,6 +10,9 @@ import it.unibo.input.StopMovement;
  */
 public class GameEngine implements Controller {
 
+    private static final double NANOS_IN_A_SECOND = 1_000_000_000.0;
+    private static final double NANOS_IN_A_MILLISECOND = 1_000_000.0;
+
     private Command currentCommand;
     private RoomManager model;
 
@@ -22,16 +25,19 @@ public class GameEngine implements Controller {
 
     /**
      * main game loop
+     * automatically updates the {@code Time.deltaTime}
      */
-    public void mainLoop() {
-        long previousCycleStartTime = System.currentTimeMillis();
+    public void run() {
+        long previousCycleStartTime = System.nanoTime();
 
         //TO DO: once the game state will be implemented, the cycle should finish if "game over"
         while(true) {
-            long currentCycleStartTime = System.currentTimeMillis();
+            long currentCycleStartTime = System.nanoTime();
+            double deltaTime = (currentCycleStartTime - previousCycleStartTime) / NANOS_IN_A_SECOND;
+            Time.updateDeltaTime(deltaTime);
 
             this.processInput();
-            this.update(currentCycleStartTime - previousCycleStartTime);
+            this.update();
             this.render();
 
             this.waitUntilNextFrame(currentCycleStartTime);
@@ -45,28 +51,29 @@ public class GameEngine implements Controller {
      * @param currentCycleStartTime the current game loop start time
      */
     private void waitUntilNextFrame(final long currentCycleStartTime) {
-        long deltaTime = System.currentTimeMillis() - currentCycleStartTime;
+        final long frameDuration = System.nanoTime() - currentCycleStartTime;
+        final long sleepTime = this.calculateCapFrameTime() - frameDuration;
 
-        if(deltaTime <= GameSettings.FPS_CAP.getValueAsInteger()) {
+        if(sleepTime > 0) {
             try {
-                Thread.sleep(this.calculateCapFrameTime() - deltaTime);
+                Thread.sleep((int) (sleepTime / NANOS_IN_A_MILLISECOND), (int) (sleepTime % NANOS_IN_A_MILLISECOND));
             } catch(final Exception exep) {}
         }
     }
 
     /**
      * calculates the period for fps cap
-     * @return fps cap frame time
+     * @return the correct time between frames to not overcome the fps cap
      */
-    private int calculateCapFrameTime() {
-        return (1_000 / GameSettings.FPS_CAP.getValueAsInteger());
+    private long calculateCapFrameTime() {
+        return (long) (NANOS_IN_A_SECOND / GameSettings.FPS_CAP.getValueAsInteger());
     }
 
     /**
      * updates the game state
      * @param elapsed time elapsed between previous and current frame
      */
-    private void update(final long elapsed) {
+    private void update() {
         //TO DO
         throw new IllegalStateException("method not implemented yet");
     }
