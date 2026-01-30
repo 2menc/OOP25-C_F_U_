@@ -36,6 +36,14 @@ public class DataForEnigmas {
     /** 0 args constructor */
     public DataForEnigmas() {}
 
+    /**
+     * constructor
+     * @param id enigma's id
+     * @param question enigma's question
+     * @param correctOption enigma's correct option
+     * @param options all enigma possible answers
+     * @param doorIdForTHisKey the id of the door opened by this key, assuming this enigma has a key, {@code""} otherwise
+     */
     public DataForEnigmas(final String id, final String question, final String correctOption, 
             final List<String> options, final String doorIdForTHisKey
     ) {
@@ -95,7 +103,7 @@ public class DataForEnigmas {
 
     /**
      * sets this enigma's id
-     * @return enigma's id
+     * @param id the id
      */
     public void setId(final String id) {
         this.id = id;
@@ -103,7 +111,7 @@ public class DataForEnigmas {
 
     /**
      * sets only the id of the door opened by this key, to not saturate yaml file.
-     * @return {@code empty string} if the enigma does not have a key, {@code the door id} otherwise
+     * @param doorIdForThisKey the id of the door opened by this key
      */
     public void setDoorIdForThisKey(final String doorIdForThisKey) {
         this.doorIdForThisKey = doorIdForThisKey;
@@ -111,7 +119,7 @@ public class DataForEnigmas {
 
     /**
      * sets the enigma's question
-     * @return the question
+     * @param question the question
      */
     public void setQuestion(final String question) {
         this.question = question;
@@ -119,7 +127,7 @@ public class DataForEnigmas {
 
     /**
      * sets the enigma's possible anwers
-     * @return the {@link java.util.List} of answers
+     * @param options the answers
      */
     public void setOptions(final List<String> options) {
         this.options = options;
@@ -127,7 +135,7 @@ public class DataForEnigmas {
 
     /**
      * sets the correct answer
-     * @return the corrent answer
+     * @param correctOption the correct answer
      */
     public void setCorrectOption(final String correctOption) {
         this.correctOption = correctOption;
