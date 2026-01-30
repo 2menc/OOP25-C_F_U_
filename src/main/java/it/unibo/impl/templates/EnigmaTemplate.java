@@ -26,7 +26,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     /**
      * the key that this enigma has to give to the player when completed
      */
-    private Optional<Key> key;
+    private Key key;
 
     /**
      * The question
@@ -46,7 +46,9 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     /**
      * 0 args constructor for snakeYaml
      */
-    public EnigmaTemplate() {}
+    public EnigmaTemplate() {
+        this.completed = false;
+    }
 
     /**
      * constructor
@@ -56,7 +58,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
      * @param options the answers
      * @param correctOption the correct answer
      */
-    public EnigmaTemplate(final String id, final Optional<Key> key, 
+    public EnigmaTemplate(final String id, final Key key, 
         final String question, final List<String> options, final String correctOption
     ) {
         this.id = id;
@@ -83,7 +85,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     }
     @Override
     public boolean isKeyInside() {
-        return ! (this.key.isEmpty());
+        return this.key != null;
     }
     @Override
     public String getQuestion() {
@@ -96,6 +98,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     @Override
     public boolean solve(String answer) {
         if(answer.equals(this.correctOption)) {
+            this.completed = true;
             return true;
         }
         return false;
@@ -103,8 +106,11 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     @Override
     public String getCorrectOption() {
         return this.correctOption;
+    }    
+    @Override
+    public Optional<Key> getKey() {
+        return Optional.ofNullable(this.key);
     }
-
 //
 
 //setters
@@ -141,6 +147,14 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
         this.correctOption = correctOption;
     }
 
+    /**
+     * sets the key
+     * @param key the key to set
+     */
+    public void setKey(final Key key) {
+        this.key = key;
+    }
+
 //
 
     /**
@@ -154,9 +168,6 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
         return Objects.equals(id, that.id) && Objects.equals(question, that.question);
     }
 
-    @Override
-    public Optional<Key> getKey() {
-        return this.key;
-    }
+
 
 }
