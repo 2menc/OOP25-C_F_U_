@@ -31,7 +31,7 @@ public class EnigmaSaveWrite {
      * @param question the question
      * @param correctOption the correct answer
      * @param options all options
-     * @param hasTheKey if this enigma has to drop a key when completed
+     * @param key the (optional) key that this enigma has to give to the player when completed
      */
     public void addEnigma(final String id, final String question,
             final String correctOption, final List<String> options, final Optional<Key> key) {
