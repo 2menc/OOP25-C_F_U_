@@ -10,14 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.api.key.Key;
-import it.unibo.impl.Inventory;
+import it.unibo.impl.InventoryImpl;
+import it.unibo.api.inventory.Inventory;
 
 public class TestInventory {
     private Inventory inventory;
     
     @BeforeEach
     void init(){
-        this.inventory = new Inventory();
+        this.inventory = new InventoryImpl();
     }
 
     @Test

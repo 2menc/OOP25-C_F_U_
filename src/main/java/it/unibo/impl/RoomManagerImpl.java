@@ -8,6 +8,7 @@ import it.unibo.api.player.Player;
 import it.unibo.api.rooms.Room;
 import it.unibo.api.rooms.RoomCellsValues;
 import it.unibo.api.rooms.RoomManager;
+import it.unibo.api.inventory.Inventory;
 
 /**
  * implementation of {@link RoomManager} 

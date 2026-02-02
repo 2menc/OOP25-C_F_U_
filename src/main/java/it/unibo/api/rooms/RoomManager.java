@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import it.unibo.api.Position;
 import it.unibo.api.enigmas.Enigma;
-import it.unibo.impl.Inventory;
+import it.unibo.api.inventory.Inventory;
 
 /**
  * a simple manager for player movement in the rooms

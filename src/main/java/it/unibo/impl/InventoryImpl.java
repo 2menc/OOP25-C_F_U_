@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import it.unibo.api.inventory.Inventory;
 import it.unibo.api.key.Key;
 
 /**
 * Inventory system
 * implements {@link java.io.Serializable}
 */
-public class Inventory implements java.io.Serializable {
+public class InventoryImpl implements Inventory, java.io.Serializable {
 
      /**
      * The list of the keys
@@ -21,7 +22,7 @@ public class Inventory implements java.io.Serializable {
     /**
      * constructor
      */
-    public Inventory(){
+    public InventoryImpl(){
         this.keys=new ArrayList<>();
     }
 

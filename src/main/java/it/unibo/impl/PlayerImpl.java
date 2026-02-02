@@ -3,6 +3,7 @@ package it.unibo.impl;
 import java.util.Optional;
 
 import it.unibo.api.Position;
+import it.unibo.api.inventory.Inventory;
 import it.unibo.api.key.Key;
 import it.unibo.api.player.Player;
 
@@ -35,7 +36,7 @@ public class PlayerImpl implements Player, java.io.Serializable {
     public PlayerImpl(Position position){
         this.position=position;
         this.score=0;
-        this.inventory=new Inventory();
+        this.inventory=new InventoryImpl();
     }
 
     @Override
