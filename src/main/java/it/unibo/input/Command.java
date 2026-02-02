@@ -14,6 +14,7 @@ public interface Command {
      * executes the command using the given model
      * @param model the {@link RoomManager} responsible for managing
      *              the room state and the player's position
+     * @return an Optional that containing an Enigma
      */
     Optional<Enigma> execute(RoomManager model);
 
