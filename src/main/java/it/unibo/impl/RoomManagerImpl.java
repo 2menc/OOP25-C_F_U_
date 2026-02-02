@@ -80,13 +80,19 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
 
     @Override
     public Optional<Enigma> enterEnigma(final Position posEnigma){
-        return Optional.of(this.currentRoom.getEnigma(posEnigma));
+        if(this.currentRoom.getCellContent(posEnigma) == RoomCellsValues.ENIGMA) {
+            return Optional.of(this.currentRoom.getEnigma(posEnigma));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public void enterDoor(final Position posDoor){ 
-        if(this.currentRoom.getDoor(posDoor).isOpen()){
-                enterNextRoom(this.currentRoom.getDoor(posDoor).getDstRoom());
+        if(this.currentRoom.getCellContent(posDoor) == RoomCellsValues.DOOR) {
+            if(this.currentRoom.getDoor(posDoor).isOpen()){
+                    enterNextRoom(this.currentRoom.getDoor(posDoor).getDstRoom());
+            }
         }
     }
 

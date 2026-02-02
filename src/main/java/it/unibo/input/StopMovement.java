@@ -1,5 +1,8 @@
 package it.unibo.input;
 
+import java.util.Optional;
+
+import it.unibo.api.enigmas.Enigma;
 import it.unibo.api.rooms.RoomManager;
 
 /**
@@ -15,8 +18,9 @@ public class StopMovement implements Command {
     }
 
     @Override
-    public void execute(RoomManager model) {
+    public Optional<Enigma> execute(RoomManager model) {
         // Intentionally does nothing: player is stopped
+        return Optional.empty();
     }
 
 }

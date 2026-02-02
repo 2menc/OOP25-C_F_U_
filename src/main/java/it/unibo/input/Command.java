@@ -1,5 +1,8 @@
 package it.unibo.input;
 
+import java.util.Optional;
+
+import it.unibo.api.enigmas.Enigma;
 import it.unibo.api.rooms.RoomManager;
 
 /**
@@ -12,6 +15,6 @@ public interface Command {
      * @param model the {@link RoomManager} responsible for managing
      *              the room state and the player's position
      */
-    void execute(RoomManager model);
+    Optional<Enigma> execute(RoomManager model);
 
 }
