@@ -12,17 +12,20 @@ public class DoorImpl implements Door, java.io.Serializable {
      /**
      * The id of the door
      */
-    private final String id;
+    private String id;
 
      /**
      * The destination room
      */
-    private final Room dstRoom;
+    private Room dstRoom;
 
      /**
      * indicates if the door is open
      */
     private boolean open;
+
+    /** 0-args constructor */
+    public DoorImpl() {}
 
     /**
      * constructor
@@ -54,5 +57,21 @@ public class DoorImpl implements Door, java.io.Serializable {
     public void setOpen(boolean b) {
         this.open = true;
     }    
+
+    /**
+     * sets this door's id
+     * @param id the id
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * sets the destination room
+     * @param room the dst room
+     */
+    public void setDstRoom(final Room room) {
+        this.dstRoom = room;
+    }
 
 }

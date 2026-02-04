@@ -22,22 +22,25 @@ public class RoomTemplate implements Room, java.io.Serializable {
      /**
      * The id of the room
      */
-    private final String id;
+    private String id;
 
      /**
      * The game map
      */
-    private final Map<Position, RoomCellsValues> grid;
+    private Map<Position, RoomCellsValues> grid;
 
      /**
      * The position of the enigmas
      */
-    private final Map<Position, Enigma> enigmaGrid;
+    private Map<Position, Enigma> enigmaGrid;
 
      /**
      * The position of the doors
      */
-    private final Map<Position, Door> doorGrid;
+    private Map<Position, Door> doorGrid;
+
+    /** 0-args constructor */
+    public RoomTemplate() {}
 
     /**
      * constructor
@@ -200,4 +203,63 @@ public class RoomTemplate implements Room, java.io.Serializable {
         return this.enigmaGrid.get(pos);
     }
     
+//setters and getters for yaml//
+
+    /**
+     * setter for snakeYaml
+     * @param id .
+     */
+    private void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * setter for snakeYaml
+     * @param grid .
+     */
+    private void setGrid(final Map<Position, RoomCellsValues> map) {
+        this.grid = map;
+    }
+    
+    /**
+     * setter for snakeYaml
+     * @param map .
+     */
+    private void setEnigmaGrid(final Map<Position, Enigma> map) {
+        this.enigmaGrid = map;
+    }
+
+    /**
+     * setter for snakeYaml
+     * @param map .
+     */
+    private void setDoorGrid(final Map<Position, Door> map) {
+        this.doorGrid = map;
+    }
+
+    /**
+     * getter for snakeYaml
+     * @return .
+     */
+    private Map<Position, RoomCellsValues> getGrid() {
+        return this.grid;
+    }
+
+    /**
+     * getter for snakeYaml
+     * @return .
+     */
+    private Map<Position, Enigma> getEnigmaGrid() {
+        return this.enigmaGrid;
+    }
+
+    /**
+     * getter for snakeYaml
+     * @return .
+     */
+    private Map<Position, Door> getDoorGrid() {
+        return this.doorGrid;
+    }
+    //
+
 }
