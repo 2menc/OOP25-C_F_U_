@@ -37,8 +37,14 @@ public class EnigmasGenerator {
     }
 
     private static void populateList(final List<Enigma> list) {
-        it.unibo.impl.templates.KeyTemplate k = new KeyTemplate("key1", "door key test", new DoorImpl("door test", new RoomTemplate("room id"))); 
+
+        final it.unibo.api.rooms.Room testRoom = new RoomTemplate("test room id");
+        final it.unibo.api.doors.Door testDoor = new DoorImpl("test door id", testRoom);
+
+        final it.unibo.impl.templates.KeyTemplate k = new KeyTemplate("key1", "door key test", testDoor); 
+        
         list.add(new EnigmaTemplate("testId", k, "qestion1", List.of("opt1", "opt2"), "opt1"));
+        
     }
 
 }

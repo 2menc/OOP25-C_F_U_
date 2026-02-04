@@ -2,6 +2,8 @@ package it.unibo.storage.enigma;
 
 import java.util.List;
 
+import it.unibo.api.key.Key;
+
 /**
  * data template for Enigmas saving on yaml
  */
@@ -28,10 +30,10 @@ public class DataForEnigmas {
     private List<String> options;
 
     /**
-     * stores the id of the key contained in this enigma, to not saturate yaml file.
-     * {@code empty string} if the enigma does not have a key
+     * the key that this enigma has to drop when completed
+     * {@code null} if the enigma does not have a key (null key is handled in {@link Enigma})
      */
-    private String keyId;
+    private Key key;
 
     /** 0 args constructor */
     public DataForEnigmas() {}
@@ -42,16 +44,16 @@ public class DataForEnigmas {
      * @param question enigma's question
      * @param correctOption enigma's correct option
      * @param options all enigma possible answers
-     * @param keyId the id of the door opened by this key, assuming this enigma has a key, {@code""} otherwise
+     * @param key the key contained in this enigma, assuming this enigma has a key, {@code null} otherwise (null reference checked in {@code Enigma})
      */
     public DataForEnigmas(final String id, final String question, final String correctOption, 
-            final List<String> options, final String keyId
+            final List<String> options, final Key key
     ) {
         this.id = id;
         this.question = question;
         this.correctOption = correctOption;
         this.options = options;
-        this.keyId = keyId;
+        this.key = key;
     }
 
 
@@ -66,11 +68,11 @@ public class DataForEnigmas {
     }
 
     /**
-     * gets only the id of the door opened by this key, to not saturate yaml file.
-     * @return {@code empty string} if the enigma does not have a key, {@code the door id} otherwise
+     * gets the key in this enigma
+     * @return {@code null} (handled in {@code Enigma}) if the enigma does not have a key, the {@link Key} otherwise
      */
-    public String getKeyId() {
-        return this.keyId;
+    public Key getKey() {
+        return this.key;
     }
 
     /**
@@ -110,11 +112,11 @@ public class DataForEnigmas {
     }
 
     /**
-     * sets only the id of the door opened by this key, to not saturate yaml file.
-     * @param keyId the id of the door opened by this key
+     * sets the key
+     * @param key the Key to set
      */
-    public void setKeyId(final String keyId) {
-        this.keyId = keyId;
+    public void setKey(final Key key) {
+        this.key = key;
     }
 
     /**

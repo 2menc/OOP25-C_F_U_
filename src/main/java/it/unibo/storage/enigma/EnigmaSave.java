@@ -7,6 +7,7 @@ import org.yaml.snakeyaml.inspector.TagInspector;
 
 import it.unibo.api.enigmas.Enigma;
 import it.unibo.core.GameSettings;
+import it.unibo.impl.templates.EnigmaTemplate;
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class EnigmaSave {
 
-    List<DataForEnigmas> enigmas = new ArrayList<>();
+    List<Enigma> enigmas = new ArrayList<>();
     
     /**
      * 0 args constructor
@@ -37,7 +38,7 @@ public class EnigmaSave {
         list.stream().forEach(e -> {
             saveList.add(new DataForEnigmas(e.getId(), e.getQuestion(), 
             e.getCorrectOption(), e.getOptions(), 
-            e.getKey().isEmpty() ? "" : e.getKey().get().getId()));
+            e.getKey().get()));
         });
 
         final Yaml yamlWrite = new Yaml();
@@ -61,8 +62,7 @@ public class EnigmaSave {
             final List<DataForEnigmas> raw = yamlRead.load(fis);
 
             raw.stream().forEach(e -> {
-                this.enigmas.add(new DataForEnigmas(e.getId(), e.getQuestion(), 
-                    e.getCorrectOption(), e.getOptions(), e.getKeyId()));
+                this.enigmas.add(new EnigmaTemplate(e.getId(), e.getKey(), e.getQuestion(), e.getOptions(), e.getCorrectOption()));
             });
 
         } catch (final Exception excep) {
@@ -74,7 +74,7 @@ public class EnigmaSave {
      * gets the list of the enigmas in the file
      * @return the list of enigmas
      */
-    public List<DataForEnigmas> getEnigmas() {
+    public List<Enigma> getEnigmas() {
         return this.enigmas;
     }
 }
