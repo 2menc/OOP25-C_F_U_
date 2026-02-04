@@ -2,21 +2,13 @@ package it.unibo.player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.api.Position;
-import it.unibo.api.doors.Door;
 import it.unibo.api.player.Player;
-import it.unibo.api.key.Key;
 import it.unibo.impl.PlayerImpl;
-import it.unibo.impl.templates.KeyTemplate;
 
 public class TestPlayer{
     private Player player;
@@ -32,7 +24,6 @@ public class TestPlayer{
     void testInitialization(){
         assertEquals(this.startPosition, this.player.getPosition());
         assertEquals(0,this.player.getPoints());
-        assertNotNull(this.player.getInventory());
     }
 
     @Test
@@ -53,19 +44,5 @@ public class TestPlayer{
 
         this.player.addPoints();
         assertEquals(2, this.player.getPoints());
-    }
-
-    @Test
-    void testInventoryInteractions(){
-        assertNotNull(this.player.getInventory());
-
-        Door dummyDoor = mock(Door.class);
-        Key newKey = new KeyTemplate("key-001", "first-door", dummyDoor);
-
-        this.player.addKeyToInventory(Optional.of(newKey));
-        assertNotNull(this.player.getInventory());
-
-        assertTrue(this.player.getInventory().hasTheKey(newKey.getId()));
-
     }
 }

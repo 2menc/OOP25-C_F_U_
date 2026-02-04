@@ -1,36 +1,22 @@
 package it.unibo.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
 
-import java.util.Optional;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.api.key.Key;
-import it.unibo.impl.InventoryImpl;
-import it.unibo.api.inventory.Inventory;
+import it.unibo.impl.DoorImpl;
+import it.unibo.impl.Inventory;
+import it.unibo.impl.templates.KeyTemplate;
+import it.unibo.impl.templates.RoomTemplate;
 
 public class TestInventory {
-    private Inventory inventory;
-    
-    @BeforeEach
-    void init(){
-        this.inventory = new InventoryImpl();
-    }
-
-    @Test
-    void testInitialization(){
-        assertNotNull(this.inventory);
-    }
 
     @Test
     void testAddKey(){
-        Key dummyKey = mock(Key.class);
-        this.inventory.addKey(Optional.of(dummyKey));
+        Key dummyKey= new KeyTemplate("key-001", "gold key", new DoorImpl("door-001", new RoomTemplate("room-001"))); 
+        Inventory.addKey(dummyKey);
 
-        assertTrue(this.inventory.hasTheKey(dummyKey.getId()));
+        assertTrue(Inventory.hasTheKey(dummyKey.getId()));
     }
 }

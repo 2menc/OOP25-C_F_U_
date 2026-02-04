@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import it.unibo.api.Position;
 import it.unibo.api.enigmas.Enigma;
-import it.unibo.api.inventory.Inventory;
 
 /**
  * a simple manager for player movement in the rooms
@@ -22,12 +21,6 @@ public interface RoomManager {
      * @return the current room
      */
     Room getCurrentRoom();
-
-    /**
-     * gets the inventory
-     * @return the inventory
-     */
-    Inventory getInventory();
 
     /**
      * checks if the cell in wich the player wants to move is free or has an {@link RoomCellsValues} parameter

@@ -3,46 +3,41 @@ package it.unibo.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import it.unibo.api.inventory.Inventory;
+
 import it.unibo.api.key.Key;
 
 /**
 * Inventory system
 * implements {@link java.io.Serializable}
 */
-public class InventoryImpl implements Inventory, java.io.Serializable {
+public class Inventory implements java.io.Serializable {
 
      /**
      * The list of the keys
      */
-    private final List<Key> keys;
+    private static List<Key> keys = new ArrayList<>();
 
     /**
      * constructor
      */
-    public InventoryImpl(){
-        this.keys=new ArrayList<>();
-    }
+    public Inventory(){ }
 
     /**
      * gets the list of the keys
      * @return the keys
      */
-    public List<Key> getKeys(){
-        return new ArrayList<Key>(keys);
+    public static List<Key> getKeys(){
+        return keys;
     }
 
     /**
      * add an obj Key to the list
      * @param opt optional param key
      */
-    public void addKey(Optional<Key> opt){
-        if(! opt.isEmpty()){
-            this.keys.add(opt.get());
-            System.out.println("You collected: "+opt.get().getName());
-        }
+    public static void addKey(Key key){
+        keys.add(key);
+        System.out.println("You collected: "+key.getName());
     }
 
     /**
@@ -50,9 +45,9 @@ public class InventoryImpl implements Inventory, java.io.Serializable {
      * @param keyId the id of the key you are looking for
      * @return true if the key is in the inventory false if it is not
      */
-    public boolean hasTheKey(String keyId){
-        for(Key k:this.keys){
-            if(k.getId().equals(keyId)){
+    public static boolean hasTheKey(String keyId){
+        for(Key k:keys){
+            if(k.getId()==keyId){
                 return true;
             }
         }

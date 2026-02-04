@@ -8,7 +8,6 @@ import it.unibo.api.player.Player;
 import it.unibo.api.rooms.Room;
 import it.unibo.api.rooms.RoomCellsValues;
 import it.unibo.api.rooms.RoomManager;
-import it.unibo.api.inventory.Inventory;
 
 /**
  * implementation of {@link RoomManager} 
@@ -47,11 +46,6 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
     @Override
     public Position getCurrentPosition() {
         return this.player.getPosition();
-    }
-
-    @Override
-    public Inventory getInventory() {
-        return this.player.getInventory();
     }
 
     @Override
