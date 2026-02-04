@@ -21,7 +21,7 @@ public class Inventory implements java.io.Serializable {
     /**
      * constructor
      */
-    public Inventory(){ }
+    private Inventory(){ }
 
     /**
      * gets the list of the keys
