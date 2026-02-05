@@ -2,10 +2,10 @@ package it.unibo.storage.rooms;
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.yaml.snakeyaml.DumperOptions;
+//import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.inspector.TagInspector;
@@ -48,10 +48,10 @@ public class RoomSave {
                 final DataForRooms dto = new DataForRooms();
                 
                 dto.setId(rt.getId());
+                dto.setSize(rt.getSize());
 
                 List<DataForRooms.DoorData> doorDataList = new ArrayList<>();
                 rt.getDoorGrid().forEach((pos, door) -> {
-                    // Controllo e Cast per ottenere l'ID della destinazione
                     Room dst = door.getDstRoom();
                     String dstId = (dst instanceof RoomTemplate) ? ((RoomTemplate) dst).getId() : null;
 
@@ -81,18 +81,11 @@ public class RoomSave {
                 saveList.add(dto);
             }
         });
-
-        final DumperOptions options = new DumperOptions();
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        options.setPrettyFlow(true);
-
-        final Yaml yamlWrite = new Yaml(options);
-
-        final String path = GameSettings.YAML_FILES_DEFAULT_PATH.getValue() + "/rooms.yml";
-
-        try (final PrintWriter writer = new PrintWriter(new FileWriter(path))) {
-            yamlWrite.dump(saveList, writer);
-        } catch (final IOException excep) {
+//777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        final Yaml yamlWrite = new Yaml();
+        try(FileWriter fw = new FileWriter(GameSettings.ROOM_YAML_FILES_DEFAULTPATH.getValue())) {
+            yamlWrite.dump(saveList, fw);
+        } catch (IOException excep) {
             excep.printStackTrace();
         }
     }
@@ -101,11 +94,32 @@ public class RoomSave {
      * Loads the rooms list from rooms.yml
      */
     public void loadRooms() {
-        final String path = GameSettings.YAML_FILES_DEFAULT_PATH.getValue() + "/rooms.yml";
+        final LoaderOptions loadOpt = new LoaderOptions();
+        final TagInspector tagInsp = t -> t.getClassName().startsWith("it.unibo");
+        loadOpt.setTagInspector(tagInsp);
+
+        try(final InputStream fis = new FileInputStream(GameSettings.ROOM_YAML_FILES_DEFAULTPATH.getValue())) {
+            final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
+            final List<DataForRooms> rawData = yamlRead.load(fis);
+
+            Optional.ofNullable(rawData).ifPresent(data -> {
+                final Map<String, RoomTemplate> registry = createRoomShells(data);
+
+                populateRoomsContent(data, registry);
+                this.rooms.clear();
+                this.rooms.addAll(registry.values());
+            });
+
+        } catch (final Exception excep) {
+            excep.printStackTrace();
+        }
+        /*final String path= "src/main/resources/rooms.yml";
         final File file = new File(path);
+
         if (!file.exists()) {
             return;
         }
+
         final LoaderOptions loadOpt = new LoaderOptions();
         final TagInspector tagInsp = t -> t.getClassName().startsWith("it.unibo");
         loadOpt.setTagInspector(tagInsp);
@@ -126,7 +140,7 @@ public class RoomSave {
 
         } catch (final Exception excep) {
             excep.printStackTrace();
-        }
+        }*/
     }
 
     public List<Room> getRooms() {
