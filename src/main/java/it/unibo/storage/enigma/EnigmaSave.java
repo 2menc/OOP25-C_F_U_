@@ -42,7 +42,7 @@ public class EnigmaSave {
         });
 
         final Yaml yamlWrite = new Yaml();
-        try(FileWriter fw = new FileWriter(GameSettings.YAML_FILES_DEFAULT_PATH.getValue())) {
+        try(FileWriter fw = new FileWriter(GameSettings.ENIGMAS_YAML_FILES_DEFAULT_PATH.getValue())) {
             yamlWrite.dump(saveList, fw);
         } catch (IOException excep) {
             excep.printStackTrace();
@@ -57,7 +57,7 @@ public class EnigmaSave {
         final TagInspector tagInsp = t -> t.getClassName().startsWith("it.unibo");
         loadOpt.setTagInspector(tagInsp);
 
-        try(final InputStream fis = new FileInputStream(GameSettings.YAML_FILES_DEFAULT_PATH.getValue())) {
+        try(final InputStream fis = new FileInputStream(GameSettings.ENIGMAS_YAML_FILES_DEFAULT_PATH.getValue())) {
             final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
             final List<DataForEnigmas> raw = yamlRead.load(fis);
 

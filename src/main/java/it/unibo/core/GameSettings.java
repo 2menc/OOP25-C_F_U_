@@ -9,7 +9,7 @@ public enum GameSettings {
     FPS_CAP("60"),
 
     /** default path for yml files */
-    YAML_FILES_DEFAULT_PATH("./src/main/resources/enigmas.yml");
+    ENIGMAS_YAML_FILES_DEFAULT_PATH("./src/main/resources/enigmas.yml");
 
     private final String value;
 
