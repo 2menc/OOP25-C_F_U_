@@ -38,7 +38,7 @@ public class EnigmaSave {
         list.stream().forEach(e -> {
             saveList.add(new DataForEnigmas(e.getId(), e.getQuestion(), 
             e.getCorrectOption(), e.getOptions(), 
-            e.getKey().get()));
+            e.getKey().isEmpty() ? null : e.getKey().get()));
         });
 
         final Yaml yamlWrite = new Yaml();
