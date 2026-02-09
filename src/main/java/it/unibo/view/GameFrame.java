@@ -3,13 +3,19 @@ package it.unibo.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Optional;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.api.Position;
+import it.unibo.api.enigmas.Enigma;
+import it.unibo.api.key.Key;
 import it.unibo.api.rooms.Room;
+import it.unibo.impl.Inventory;
 import it.unibo.input.Controller;
+import it.unibo.input.StopMovement;
 
 /**
  * Main window of the game application.
@@ -31,17 +37,14 @@ public class GameFrame extends JFrame implements View {
      * constructor
      * @param room the room shown
      * @param playerPosition the positon of the player
-     * @param controller the controller
      */
-    public GameFrame(Room room, Position playerPosition, Controller controller) {
+    public GameFrame(Room room, Position playerPosition) {
         setTitle("C. F. U.");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);            
         setLocationRelativeTo(null);    
         setResizable(false);  
         setLayout(new BorderLayout());         
-
-        this.controller = controller;
 
         this.gamePanel = new GamePanel(room, playerPosition, controller);
         this.gamePanel.setPreferredSize(new Dimension(800, 600));
@@ -56,8 +59,52 @@ public class GameFrame extends JFrame implements View {
     }
 
     @Override
-    public void updateView(Room room, Position position){
+    public void updateView(Room room, Position position, Optional<Enigma> enigma){
+        if(room == null) {}
+        gamePanel.setRoom(room);
+        gamePanel.setPlayerPosition(position);
     	gamePanel.repaint();
+        if(enigma.isPresent()) {
+            Enigma realEnigma = enigma.get();
+            if(!realEnigma.isCompleted()) {
+                Object[] options = realEnigma.getOptions().toArray();
+                String answer = (String) JOptionPane.showInputDialog(
+                    this,
+                    realEnigma.getId(),
+                    realEnigma.getQuestion(),
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+                );
+                if(answer == null) {
+                    JOptionPane.showMessageDialog(this, "no answer");
+                    controller.catchCommand(new StopMovement());
+                } else {
+                    boolean solve = realEnigma.solve(answer);
+                    if (solve) {
+                        Optional<Key> key = realEnigma.getKey();
+                        if(key.isPresent()) {
+                            Key realKey = key.get();
+                            Inventory.addKey(realKey);
+                            JOptionPane.showMessageDialog(this, "true, key found");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "true, there is no key");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "false, try again");
+                    }
+                    
+                }
+            }
+            
+        }
+    }
+
+    @Override
+    public void setController(Controller controller) {
+        this.controller = controller;
+        this.gamePanel.setController(controller);
     }
     
 }

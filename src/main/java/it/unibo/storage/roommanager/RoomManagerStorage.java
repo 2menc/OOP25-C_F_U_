@@ -43,6 +43,7 @@ public class RoomManagerStorage {
     public static RoomManager load() throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILENAME))) {
             RoomManager roomManager = (RoomManager) in.readObject();
+            @SuppressWarnings("unchecked")
             List<Key> keys = (List<Key>) in.readObject();
             Inventory.reset();
             for(Key key : keys) {

@@ -1,9 +1,13 @@
 package it.unibo.core;
 
+import java.util.Optional;
+
+import it.unibo.api.enigmas.Enigma;
 import it.unibo.api.rooms.RoomManager;
 import it.unibo.input.Command;
 import it.unibo.input.Controller;
 import it.unibo.input.StopMovement;
+import it.unibo.view.View;
 
 /**
  * simple game engine containing the main loop
@@ -14,13 +18,16 @@ public class GameEngine implements Controller {
     private static final double NANOS_IN_A_MILLISECOND = 1_000_000.0;
 
     private Command currentCommand;
+    private View view;
     private RoomManager model;
 
     /**
      * basic constructor
      */
-    public GameEngine() {
+    public GameEngine(View view, RoomManager model) {
         this.currentCommand = new StopMovement();
+        this.view = view;
+        this.model = model;
      }
 
     /**
@@ -37,8 +44,8 @@ public class GameEngine implements Controller {
             Time.updateDeltaTime(deltaTime);
 
             this.processInput();
-            this.update();
-            this.render();
+            // this.update();
+            // this.render();
 
             this.waitUntilNextFrame(currentCycleStartTime);
 
@@ -91,7 +98,8 @@ public class GameEngine implements Controller {
      */
     private void processInput() {
         if (currentCommand != null){
-			currentCommand.execute(model);
+			Optional<Enigma> enigma = currentCommand.execute(model);
+            view.updateView(model.getCurrentRoom(), model.getCurrentPosition(), enigma);
 		}  
     }
 

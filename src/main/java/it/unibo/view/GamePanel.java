@@ -139,5 +139,9 @@ public class GamePanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         controller.catchCommand(new StopMovement());
     }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
         
 }
