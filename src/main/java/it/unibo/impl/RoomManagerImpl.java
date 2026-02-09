@@ -87,6 +87,7 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
         if(this.currentRoom.getCellContent(posDoor) == RoomCellsValues.DOOR) {
             if(this.currentRoom.getDoor(posDoor).isOpen()){
                     enterNextRoom(this.currentRoom.getDoor(posDoor).getDstRoom());
+                    computeMove(true, new Position(1, 1));
             }
         }
     }
