@@ -23,6 +23,7 @@ public class GameEngine implements Controller {
     private View view;
     private RoomManager model;
     private Vector2D v2d;
+    private long nextCurrentCycleStartTime;
 
     /**
      * basic constructor
@@ -54,7 +55,7 @@ public class GameEngine implements Controller {
 
             this.waitUntilNextFrame(currentCycleStartTime);
 
-            previousCycleStartTime = currentCycleStartTime;
+            previousCycleStartTime = nextCurrentCycleStartTime;
         }
     }
 
@@ -143,6 +144,7 @@ public class GameEngine implements Controller {
      */
     private void render(Optional<Enigma> enigma) {
         view.updateView(model.getCurrentRoom(), model.getCurrentPosition(), enigma);
+        nextCurrentCycleStartTime = System.nanoTime();
     }
 
     /**
