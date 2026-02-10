@@ -2,6 +2,8 @@ package it.unibo.core;
 
 import java.util.Optional;
 
+import it.unibo.api.Position;
+import it.unibo.api.Vector2D;
 import it.unibo.api.enigmas.Enigma;
 import it.unibo.api.rooms.RoomManager;
 import it.unibo.input.Command;
@@ -20,9 +22,12 @@ public class GameEngine implements Controller {
     private Command currentCommand;
     private View view;
     private RoomManager model;
+    private Vector2D v2d;
 
     /**
      * basic constructor
+     * @param view the view
+     * @param model the model
      */
     public GameEngine(View view, RoomManager model) {
         this.currentCommand = new StopMovement();
@@ -43,9 +48,9 @@ public class GameEngine implements Controller {
             double deltaTime = (currentCycleStartTime - previousCycleStartTime) / NANOS_IN_A_SECOND;
             Time.updateDeltaTime(deltaTime);
 
-            this.processInput();
-            this.update();
-            this.render();
+            Vector2D v2d = this.processInput();
+            Optional<Enigma> enigma = this.update(Time.deltaTime(), v2d);
+            this.render(enigma);
 
             this.waitUntilNextFrame(currentCycleStartTime);
 
@@ -80,27 +85,75 @@ public class GameEngine implements Controller {
      * updates the game state
      * @param elapsed time elapsed between previous and current frame
      */
-    private void update() {
-        //TO DO
-        throw new IllegalStateException("method not implemented yet");
+    private Optional<Enigma> update(double elapsed, Vector2D v2d) {
+        Position currentPosition = model.getCurrentPosition();
+        Position nextPosition = currentPosition.sum(v2d.mul(1*elapsed));
+        int xFloor = (int) Math.floor(nextPosition.getX());
+        int yFloor = (int) Math.floor(nextPosition.getY());
+        int xCeil = (int) Math.ceil(nextPosition.getX());
+        int yCeil = (int) Math.ceil(nextPosition.getY());
+
+        Position roundDownNextPosition = new Position(xFloor, yFloor);
+        Boolean collidingDown = model.isPlayerColliding(roundDownNextPosition);
+        Position roundUpNextPosition = new Position(xCeil, yCeil);
+        Boolean collidingUp = model.isPlayerColliding(roundUpNextPosition);
+        Position roundDownUpNextPosition = new Position(xFloor, yCeil);
+        Boolean collidingDownUp = model.isPlayerColliding(roundDownUpNextPosition);
+        Position roundUpDownNextPosition = new Position(xCeil, yFloor);
+        Boolean collidingUpDown = model.isPlayerColliding(roundUpDownNextPosition);
+
+        if(collidingDown || collidingUp || collidingDownUp || collidingUpDown) {
+            boolean eventDown = model.isEnteringAnEvent(roundDownNextPosition);
+            boolean eventUp = model.isEnteringAnEvent(roundUpNextPosition);
+            boolean eventDownUp = model.isEnteringAnEvent(roundDownUpNextPosition);
+            boolean eventUpDown = model.isEnteringAnEvent(roundUpDownNextPosition);
+            if(eventDown == true) {
+                model.enterDoor(roundDownNextPosition);
+                return model.enterEnigma(roundDownNextPosition);
+            } else if (eventUp == true) {
+                model.enterDoor(roundUpNextPosition);
+                return model.enterEnigma(roundUpNextPosition);
+            } else if (eventDownUp == true) {
+                model.enterDoor(roundDownUpNextPosition);
+                return model.enterEnigma(roundDownUpNextPosition);
+            } else if (eventUpDown == true) {
+                model.enterDoor(roundUpDownNextPosition);
+                return model.enterEnigma(roundUpDownNextPosition);
+            }
+            if(collidingDown == true) {
+                model.computeMove(true, roundUpNextPosition);
+            }
+            if(collidingUp == true) {
+                model.computeMove(true, roundDownNextPosition);
+            }
+            if(collidingDownUp == true) {
+                model.computeMove(true, roundUpDownNextPosition);
+            }
+            if(collidingUpDown == true) {
+                model.computeMove(true, roundDownUpNextPosition);
+            }
+        } else {
+            model.computeMove(true, nextPosition);
+        }
+        return Optional.empty();
     }
 
     /**
      * tells the view to render the current scene
      */
-    private void render() {
-        //TO DO
-        throw new IllegalStateException("method not implemented yet");
+    private void render(Optional<Enigma> enigma) {
+        view.updateView(model.getCurrentRoom(), model.getCurrentPosition(), enigma);
     }
 
     /**
      * processes the movement based on the input and the deltaTime
      */
-    private void processInput() {
+    private Vector2D processInput() {
         if (currentCommand != null){
-			Optional<Enigma> enigma = currentCommand.execute(model);
-            view.updateView(model.getCurrentRoom(), model.getCurrentPosition(), enigma);
+			v2d = currentCommand.execute();
+            return v2d;
 		}  
+        return new Vector2D(0, 0);
     }
 
     @Override

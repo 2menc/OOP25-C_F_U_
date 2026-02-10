@@ -60,12 +60,13 @@ public class GameFrame extends JFrame implements View {
 
     @Override
     public void updateView(Room room, Position position, Optional<Enigma> enigma){
-        if(room == null) {}
+        if(room == null) { /*to do*/}
         gamePanel.setRoom(room);
         gamePanel.setPlayerPosition(position);
     	gamePanel.repaint();
         if(enigma.isPresent()) {
             Enigma realEnigma = enigma.get();
+            controller.catchCommand(new StopMovement());
             if(!realEnigma.isCompleted()) {
                 Object[] options = realEnigma.getOptions().toArray();
                 String answer = (String) JOptionPane.showInputDialog(
@@ -78,7 +79,7 @@ public class GameFrame extends JFrame implements View {
                     options[0]
                 );
                 if(answer == null) {
-                    JOptionPane.showMessageDialog(this, "no answer");
+                    JOptionPane.showMessageDialog(null, "no answer");
                     controller.catchCommand(new StopMovement());
                 } else {
                     boolean solve = realEnigma.solve(answer);
@@ -87,12 +88,12 @@ public class GameFrame extends JFrame implements View {
                         if(key.isPresent()) {
                             Key realKey = key.get();
                             Inventory.addKey(realKey);
-                            JOptionPane.showMessageDialog(this, "true, key found");
+                            JOptionPane.showMessageDialog(null, "true, key found");
                         } else {
-                            JOptionPane.showMessageDialog(this, "true, there is no key");
+                            JOptionPane.showMessageDialog(null, "true, there is no key");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "false, try again");
+                        JOptionPane.showMessageDialog(null, "false, try again");
                     }
                     
                 }

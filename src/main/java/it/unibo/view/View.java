@@ -20,5 +20,9 @@ public interface View {
      */
     void updateView(Room room, Position playerPosition, Optional<Enigma> enigma);
 
+    /**
+     * set the controller
+     * @param controller the controller
+     */
     void setController(Controller controller);
 }

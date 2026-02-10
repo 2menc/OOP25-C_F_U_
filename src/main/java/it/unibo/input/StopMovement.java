@@ -1,9 +1,6 @@
 package it.unibo.input;
 
-import java.util.Optional;
-
-import it.unibo.api.enigmas.Enigma;
-import it.unibo.api.rooms.RoomManager;
+import it.unibo.api.Vector2D;
 
 /**
  * Command that intentionally does nothing and stops the player
@@ -18,9 +15,9 @@ public class StopMovement implements Command {
     }
 
     @Override
-    public Optional<Enigma> execute(RoomManager model) {
+    public Vector2D execute() {
         // Intentionally does nothing: player is stopped
-        return Optional.empty();
+        return new Vector2D(0, 0);
     }
 
 }

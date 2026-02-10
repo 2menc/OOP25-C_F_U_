@@ -1,9 +1,6 @@
 package it.unibo.input;
 
-import java.util.Optional;
-
-import it.unibo.api.enigmas.Enigma;
-import it.unibo.api.rooms.RoomManager;
+import it.unibo.api.Vector2D;
 
 /**
  * a basic command
@@ -12,10 +9,8 @@ public interface Command {
     
     /**
      * executes the command using the given model
-     * @param model the {@link RoomManager} responsible for managing
-     *              the room state and the player's position
-     * @return an Optional containing an Enigma
+     * @return the vector direction
      */
-    Optional<Enigma> execute(RoomManager model);
+    Vector2D execute();
 
 }

@@ -26,6 +26,7 @@ import javax.imageio.ImageIO;
  */
 public class GamePanel extends JPanel implements KeyListener {
 
+
     /**
      * the controller
      */
@@ -98,8 +99,8 @@ public class GamePanel extends JPanel implements KeyListener {
         int x = room.getSize();
         int y = room.getSize();
 
-        int cellWidth = getWidth() / x;
-        int cellHeight = getHeight() / y;
+        double cellWidth = (double) getWidth() / x;
+        double cellHeight = (double) getHeight() / y;
 
         for(int i=0; i<x; i++){
             for(int j=0; j<y; j++){
@@ -111,12 +112,12 @@ public class GamePanel extends JPanel implements KeyListener {
                     case ENIGMA: tile = enigmaImage; break; 
                     default: tile = freeImage; break;
                 }
-                g.drawImage(tile, i*cellWidth, j*cellHeight, cellWidth, cellHeight, null);
+                g.drawImage(tile, (int) (i*cellWidth), (int) (j*cellHeight), (int) cellWidth, (int) cellHeight, null);
             }
         }
 
         // disegna il player sopra la mappa
-        g.drawImage(playerImage, playerPosition.x()*cellWidth, playerPosition.y()*cellHeight, cellWidth, cellHeight, null);
+        g.drawImage(playerImage, (int) (playerPosition.getX()*cellWidth), (int) (playerPosition.getY()*cellHeight), (int) cellWidth, (int) cellHeight, null);
     }
 
     @Override
@@ -140,6 +141,10 @@ public class GamePanel extends JPanel implements KeyListener {
         controller.catchCommand(new StopMovement());
     }
 
+    /**
+     * set the controller
+     * @param controller the controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
