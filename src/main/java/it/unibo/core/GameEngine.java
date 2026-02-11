@@ -110,16 +110,24 @@ public class GameEngine implements Controller {
             boolean eventUpDown = model.isEnteringAnEvent(roundUpDownNextPosition);
             if(eventDown == true) {
                 model.enterDoor(roundDownNextPosition);
-                return model.enterEnigma(roundDownNextPosition);
+                if(model.getCurrentRoom() != null) {
+                    return model.enterEnigma(roundDownNextPosition);
+                }
             } else if (eventUp == true) {
                 model.enterDoor(roundUpNextPosition);
-                return model.enterEnigma(roundUpNextPosition);
+                if(model.getCurrentRoom() != null) {
+                    return model.enterEnigma(roundUpNextPosition);
+                }
             } else if (eventDownUp == true) {
                 model.enterDoor(roundDownUpNextPosition);
-                return model.enterEnigma(roundDownUpNextPosition);
+                if(model.getCurrentRoom() != null) {
+                    return model.enterEnigma(roundDownUpNextPosition);
+                }
             } else if (eventUpDown == true) {
                 model.enterDoor(roundUpDownNextPosition);
-                return model.enterEnigma(roundUpDownNextPosition);
+                if(model.getCurrentRoom() != null) {
+                    return model.enterEnigma(roundUpDownNextPosition);
+                }
             }
             if(collidingDown == true) {
                 model.computeMove(true, roundUpNextPosition);

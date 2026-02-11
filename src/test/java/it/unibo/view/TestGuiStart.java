@@ -44,8 +44,12 @@ public class TestGuiStart {
 
     static private Map<Position, Door> initializeDoorMap() {
         final Map<Position, Door> doorMap = new HashMap<>();
+        final Map<Position, Door> doorMap2 = new HashMap<>();
+        Door door2 = new DoorImpl("testDoor2", null);
+        door2.setOpen(true);
+        doorMap2.put(new Position(7, 4), door2);
         Room room2 = new RoomTemplate("id");
-        room2.setLayout(8, doorMap, initializeEnigmMap());
+        room2.setLayout(8, doorMap2, initializeEnigmMap());
         Door door = new DoorImpl("testDoor1", room2);
         door.setOpen(true);
         doorMap.put(new Position(4, 7), door);

@@ -64,7 +64,10 @@ public class GameFrame extends JFrame implements View {
 
     @Override
     public void updateView(Room room, Position position, Optional<Enigma> enigma){
-        if(room == null) { /*to do*/}
+        if(room == null) { 
+            JOptionPane.showMessageDialog(null, "end game");
+            dispose();
+        }
         gamePanel.setRoom(room);
         gamePanel.setPlayerPosition(position);
     	gamePanel.repaint();
