@@ -99,6 +99,9 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
     public boolean solve(String answer) {
         if(answer.equals(this.correctOption)) {
             this.completed = true;
+            if(this.key != null) {
+                this.key.openDoor();
+            }
             return true;
         }
         return false;
