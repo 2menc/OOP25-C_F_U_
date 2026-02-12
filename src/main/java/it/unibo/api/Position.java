@@ -5,11 +5,14 @@ package it.unibo.api;
  */
 public class Position  implements java.io.Serializable {
 
-    /** the x param */
+    /** x param */
     private double x;
     
-    /** the y param */
+    /** y param */
     private double y;
+
+    /** 0-args constructor */
+    public Position() {}
     
     /**
      * constructor
@@ -86,6 +89,22 @@ public class Position  implements java.io.Serializable {
         if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
             return false;
         return true;
+    }
+
+    /**
+     * setter for parameter x
+     * @param x the x to set
+     */
+    public void setX(final double x) {
+        this.x = x;
+    }
+
+    /**
+     * setter for parameter y
+     * @param y the y to set
+     */
+    public void setY(final double y) {
+        this.y = y;
     }
     
 }
