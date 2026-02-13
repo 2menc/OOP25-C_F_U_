@@ -23,7 +23,7 @@ public class KeyTemplate implements Key, java.io.Serializable {
     /**
      * The associated door
      */
-    private Door destination;
+    private Door dst;
 
     
     /**
@@ -35,7 +35,7 @@ public class KeyTemplate implements Key, java.io.Serializable {
     public KeyTemplate(final String id,final String name,final Door destination){
         this.id=id;
         this.name=name;
-        this.destination=destination;
+        this.dst=destination;
     }
     /**
      * 0 argoments constructor 
@@ -55,12 +55,13 @@ public class KeyTemplate implements Key, java.io.Serializable {
 
     @Override
     public Door getDst() {
-        return this.destination;
+        return this.dst;
     }
     
     @Override
     public void openDoor() {
-            this.destination.setOpen(true);
+        this.dst.setOpen(true);
+        System.out.println(dst.getId() + "è aperta: " + dst.isOpen());
     }
     
     @Override
@@ -89,6 +90,6 @@ public class KeyTemplate implements Key, java.io.Serializable {
      * @param newDoor the new destination of the key
      */
     public void setDst(final Door newDoor) {
-        this.destination=newDoor;
+        this.dst=newDoor;
     }
 }
