@@ -97,13 +97,13 @@ public class GameFrame extends JFrame implements View {
                             Key realKey = key.get();
                             Inventory.addKey(realKey);
                             JOptionPane.showMessageDialog(null, "true, key found");
+                            if (room.getDoorGrid() != null) {
+                                for (Position pos : room.getDoorGrid().keySet()) {
+                                    room.getDoor(pos).setOpen(true);
+                                }
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "true, there is no key");
-                        }
-                        if (room.getDoorGrid() != null) {
-                            for (Position pos : room.getDoorGrid().keySet()) {
-                                room.getDoor(pos).setOpen(true);
-                            }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "false, try again");
