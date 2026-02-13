@@ -54,6 +54,7 @@ public interface RoomManager {
     /**
      * if the door is open enter to the next door
      * @param posDoor to ghet the obj door
+     * @param rooms the list of rooms to serch the next room
      */
     void enterDoor(final Position posDoor,  final List<Room> rooms);
 

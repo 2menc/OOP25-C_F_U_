@@ -47,7 +47,7 @@ public class DataForDoor {
      * @return the id
      */
     public String getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -63,7 +63,7 @@ public class DataForDoor {
      * @return the id
      */
     public String getDstRoomId() {
-        return dstRoomId;
+        return this.dstRoomId;
     }
 
     /**
@@ -79,7 +79,7 @@ public class DataForDoor {
      * @return the state
      */
     public boolean isOpen() {
-        return open;
+        return this.open;
     }
 
     /**
@@ -89,10 +89,18 @@ public class DataForDoor {
     public void setOpen(final boolean open) {
         this.open = open;
     }
+    /**
+     * gets the position of the door
+     * @return the position of the door
+     */
     public Position getPositionDoor() {
-        return positionDoor;
+        return this.positionDoor;
     }
 
+    /**
+     * sets he position of the door
+     * @param positionDoor new position
+     */
     public void setPositionDoor(Position positionDoor) {
         this.positionDoor = positionDoor;
     }

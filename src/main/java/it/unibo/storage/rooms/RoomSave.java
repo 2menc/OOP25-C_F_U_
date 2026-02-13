@@ -49,6 +49,10 @@ public class RoomSave {
         return new ArrayList<>(this.rooms);
     }
 
+    /**
+     * serializes the porvided list of rooms and saves them to the file YAML "rooms.yml"
+     * @param list the list of rooms to be saved
+     */
     public void save(final List<Room> list){
         final List<DataForRooms> rooms = new ArrayList<>();
 
@@ -99,6 +103,9 @@ public class RoomSave {
 
     }
     
+    /**
+     * loads and parses room data from the file YAML "rooms.yml"
+     */
     public void loadRooms() {
         final LoaderOptions loadOpt = new LoaderOptions();
         final TagInspector tagInsp = t -> t.getClassName().startsWith("it.unibo");

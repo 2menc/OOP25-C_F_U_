@@ -12,8 +12,20 @@ import it.unibo.impl.PlayerImpl;
 import it.unibo.impl.RoomManagerImpl;
 import it.unibo.storage.rooms.RoomSave;
 
+/**
+ * the launcher of the game
+ */
 public class GameLauncher {
+
+    /**
+     * 0 args constructor
+     */
+    public GameLauncher(){}
     
+    /**
+     * the main to start the game
+     * @param args unused
+     */
     public static void main(String[] args){
         //load world
         final RoomSave storagSave = new RoomSave();

@@ -30,6 +30,7 @@ public class GameEngine implements Controller {
      * basic constructor
      * @param view the view
      * @param model the model
+     * @param rooms the list of the rooms
      */
     public GameEngine(View view, RoomManager model, List<Room> rooms) {
         this.currentCommand = new StopMovement();

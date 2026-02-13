@@ -223,7 +223,7 @@ public class RoomTemplate implements Room, java.io.Serializable {
 
     /**
      * setter for snakeYaml
-     * @param grid .
+     * @param map .
      */
     public void setGrid(final Map<Position, RoomCellsValues> map) {
         this.grid = map;

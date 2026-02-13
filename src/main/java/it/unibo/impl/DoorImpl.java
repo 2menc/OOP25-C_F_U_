@@ -1,7 +1,6 @@
 package it.unibo.impl;
 
 import it.unibo.api.doors.Door;
-import it.unibo.api.rooms.Room;
 
 /**
  * implementation of {@link Door}
@@ -30,7 +29,7 @@ public class DoorImpl implements Door, java.io.Serializable {
     /**
      * constructor
      * @param id this door's id
-     * @param dstRoom the destination {@link Room}
+     * @param dstRoomId the id destination 
      */
     public DoorImpl(final String id, final String dstRoomId) {
         this.dstRoomId = dstRoomId;
@@ -68,7 +67,7 @@ public class DoorImpl implements Door, java.io.Serializable {
 
     /**
      * sets the destination room
-     * @param room the dst room
+     * @param roomId the dst room id
      */
     public void setDstRoom(final String roomId) {
         this.dstRoomId = roomId;
