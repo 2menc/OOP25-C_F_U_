@@ -47,7 +47,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("")
+    mainClass.set("it.unibo.view.GameLauncher")
 }
 
 tasks.withType<Test>().configureEach {
