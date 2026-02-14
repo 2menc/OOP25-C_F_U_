@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class EnigmaSave {
 
+    private final static String FILE_PATH = "src/main/resources/" + GameSettings.ENIGMAS_YAML_FILE_NAME.getValue();
+
     List<Enigma> enigmas = new ArrayList<>();
     
     /**
@@ -43,7 +45,7 @@ public class EnigmaSave {
         });
 
         final Yaml yamlWrite = new Yaml();
-        try(FileWriter fw = new FileWriter(GameSettings.ENIGMAS_YAML_FILES_DEFAULT_PATH.getValue())) {
+        try(FileWriter fw = new FileWriter(GameSettings.ENIGMAS_YAML_FILE_NAME.getValue())) {
             yamlWrite.dump(saveList, fw);
         } catch (IOException excep) {
             excep.printStackTrace();
@@ -58,9 +60,39 @@ public class EnigmaSave {
         final TagInspector tagInsp = t -> t.getClassName().startsWith("it.unibo");
         loadOpt.setTagInspector(tagInsp);
 
-        try(final InputStream fis = new FileInputStream(GameSettings.ENIGMAS_YAML_FILES_DEFAULT_PATH.getValue())) {
+        InputStream is = null;
+
+        try {
+            //searches from user's saves
+            final File userSave = new File(GameSettings.ENIGMAS_YAML_FILE_NAME.getValue());
+            if(userSave.exists()) {
+                System.out.println("loading resources from " + userSave.getAbsolutePath());
+                is = new FileInputStream(userSave);
+            }
+
+            //if the file does not exist -> searches from Jar
+            if(is == null) {
+                is = getClass().getResourceAsStream("/" + GameSettings.ENIGMAS_YAML_FILE_NAME.getValue());                
+                if(is != null) {
+                    System.out.println("loading resources from " + GameSettings.ENIGMAS_YAML_FILE_NAME.getValue());
+                } 
+            }
+                    
+            //if the user file does not exist and the Jar file is not updated -> searches from the default ide path (src/main/resources/)
+            if(is == null) {
+                File ideFile = new File(FILE_PATH);
+                if(ideFile.exists()) {
+                    System.out.println("loading resources from " + FILE_PATH);
+                    is = new FileInputStream(ideFile);
+                }
+            }
+
+            if(is == null) {
+                throw new IOException("File loading error: " + FILE_PATH + " does not exist");
+            }
+
             final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
-            final List<DataForEnigmas> raw = yamlRead.load(fis);
+            final List<DataForEnigmas> raw = yamlRead.load(is);
 
             raw.stream().forEach(e -> {
                 this.enigmas.add(new EnigmaTemplate(e.getId(), e.getKey(), e.getQuestion(), e.getOptions(), e.getCorrectOption()));
@@ -68,6 +100,14 @@ public class EnigmaSave {
 
         } catch (final Exception excep) {
             excep.printStackTrace();
+        } finally {
+            if(is != null) {
+                try {
+                    is.close();
+                } catch (final IOException excep) {
+                    excep.printStackTrace();
+                }
+            }
         }
     }
 
@@ -83,7 +123,7 @@ public class EnigmaSave {
      * deletes the file
      */
     public void deleteFile() {
-        final File file = new File(GameSettings.ENIGMAS_YAML_FILES_DEFAULT_PATH.getValue());
+        final File file = new File(GameSettings.ENIGMAS_YAML_FILE_NAME.getValue());
         file.delete();
     }
 }
