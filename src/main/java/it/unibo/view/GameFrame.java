@@ -66,6 +66,12 @@ public class GameFrame extends JFrame implements View {
         inventoryPanel.setBackground(Color.DARK_GRAY);
         add(inventoryPanel, BorderLayout.EAST);
 
+        if(room.getId().equals("start_room")) {
+            JOptionPane.showMessageDialog(null, "new game");
+        } else {
+            JOptionPane.showMessageDialog(null, "game loaded from save file");
+        }
+
         setVisible(true);
     }
 
