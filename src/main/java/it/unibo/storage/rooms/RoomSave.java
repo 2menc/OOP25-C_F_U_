@@ -137,7 +137,6 @@ public class RoomSave {
                 }
             }
 
-            //MIO
             try(InputStream fis = inputStream){
                 final Yaml yamlRead = new Yaml(new Constructor(List.class, loadOpt));
                 final List<DataForRooms> rawData = yamlRead.load(inputStream);

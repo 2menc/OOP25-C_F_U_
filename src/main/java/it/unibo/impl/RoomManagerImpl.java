@@ -94,15 +94,12 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
     @Override
     public void enterDoor(final Position posDoor, final List<Room> rooms) { 
         if(this.currentRoom.getCellContent(posDoor) == RoomCellsValues.DOOR) {
-            
-            // 1. La porta è aperta?
+ 
             if(this.currentRoom.getDoor(posDoor).isOpen()) {
                 
-                // Prendo l'ID e tolgo eventuali spazi vuoti iniziali/finali
                 String targetRoomId = this.currentRoom.getDoor(posDoor).getDstRoomId().trim();
                 Room nextRoom = null;    
                 
-                // 2. Cerco la stanza nella lista usando .equals()
                 for(Room r: rooms) {
                     if(targetRoomId.equals(r.getId().trim())) {
                         nextRoom = r; 
@@ -110,7 +107,6 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
                     }
                 }
                 
-                // 3. Entro nella stanza se l'ho trovata
                 computeMove(true, new Position(1, 1));
                 enterNextRoom(nextRoom);   
             }
