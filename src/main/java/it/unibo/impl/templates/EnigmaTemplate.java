@@ -59,8 +59,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
      * @param correctOption the correct answer
      */
     public EnigmaTemplate(final String id, final Key key, 
-        final String question, final List<String> options, final String correctOption
-    ) {
+        final String question, final List<String> options, final String correctOption) {
         this.id = id;
         this.completed = false;
         this.key = key;
@@ -161,7 +160,7 @@ public class EnigmaTemplate implements Enigma, java.io.Serializable {
 //
 
     /**
-     * necessary in order to tell the tests to not check for memory addresses (for assertEquals)
+     * necessary for the tests in order to tell to not check for memory addresses (for assertEquals)
      */
     @Override
     public boolean equals(Object obj) {

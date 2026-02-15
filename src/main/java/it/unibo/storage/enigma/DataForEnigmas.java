@@ -47,8 +47,8 @@ public class DataForEnigmas {
      * @param key the key contained in this enigma, assuming this enigma has a key, {@code null} otherwise (null reference checked in {@code Enigma})
      */
     public DataForEnigmas(final String id, final String question, final String correctOption, 
-            final List<String> options, final Key key
-    ) {
+            final List<String> options, final Key key) {
+                
         this.id = id;
         this.question = question;
         this.correctOption = correctOption;

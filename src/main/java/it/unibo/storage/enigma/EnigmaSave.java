@@ -72,8 +72,6 @@ public class EnigmaSave {
             //if the file does not exist -> searches from Jar
             if(is == null) {
                 is = getClass().getResourceAsStream("/" + GameSettings.ENIGMAS_YAML_FILE_NAME.getValue());                
-                if(is != null) {
-                } 
             }
                     
             //if the user file does not exist and the Jar file is not updated -> searches from the default ide path (src/main/resources/)

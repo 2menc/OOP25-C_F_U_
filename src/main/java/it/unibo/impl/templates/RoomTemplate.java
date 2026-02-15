@@ -46,7 +46,7 @@ public class RoomTemplate implements Room, java.io.Serializable {
      * constructor
      * @param id this id
      */
-    public RoomTemplate(final String id){
+    public RoomTemplate(final String id) {
         this.doorGrid = new HashMap<>();
         this.enigmaGrid = new HashMap<>();
         this.id = id;
@@ -118,8 +118,8 @@ public class RoomTemplate implements Room, java.io.Serializable {
      */
     private boolean canPlaceDoor(final Position pos) {
         if(getElementNumber(RoomCellsValues.DOOR) < MAXIMUM_DOORS_COUNT &&
-            this.grid.get(pos) == RoomCellsValues.WALL
-        ) {
+            this.grid.get(pos) == RoomCellsValues.WALL) {
+                
             return true;
         }
         return false;
@@ -132,8 +132,9 @@ public class RoomTemplate implements Room, java.io.Serializable {
      */
     private boolean canPlaceEnigma(final Position pos) {
         if(getElementNumber(RoomCellsValues.ENIGMA) < MAXIMUM_ENIGMAS_COUNT &&
-            (this.grid.get(pos) == RoomCellsValues.WALL || this.grid.get(pos) == RoomCellsValues.FREE)
-        ) {
+            (this.grid.get(pos) == RoomCellsValues.WALL || 
+            this.grid.get(pos) == RoomCellsValues.FREE)) {
+            
             return true;
         }
         return false;
@@ -159,8 +160,8 @@ public class RoomTemplate implements Room, java.io.Serializable {
     public void setLayout(final int size, final Map<Position, Door> doorMap, final Map<Position, Enigma> enigmaMap) {
             if(size <= MAXIMUM_SIZE && 
                 doorMap.size() <= (MAXIMUM_DOORS_COUNT - getElementNumber(RoomCellsValues.DOOR)) &&
-                enigmaMap.size() <= (MAXIMUM_ENIGMAS_COUNT - getElementNumber(RoomCellsValues.ENIGMA))
-            ) {
+                enigmaMap.size() <= (MAXIMUM_ENIGMAS_COUNT - getElementNumber(RoomCellsValues.ENIGMA))) {
+
                 this.setWalls(size);
 
                 for(Position pos: doorMap.keySet()) {

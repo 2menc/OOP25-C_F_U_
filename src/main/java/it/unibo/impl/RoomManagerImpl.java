@@ -60,7 +60,7 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
     public boolean isPlayerColliding(final Position nextPosition) {
         if(currentRoom.getCellContent(nextPosition) == RoomCellsValues.FREE){
             return false;
-        }else{
+        }else {
             return true;
         }
     }
@@ -74,15 +74,16 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
 
     @Override
     public boolean isEnteringAnEvent(final Position nextPosition) {
-        if(this.currentRoom.getCellContent(nextPosition) == RoomCellsValues.ENIGMA || this.currentRoom.getCellContent(nextPosition) == RoomCellsValues.DOOR){
+        if(this.currentRoom.getCellContent(nextPosition) == RoomCellsValues.ENIGMA || 
+            this.currentRoom.getCellContent(nextPosition) == RoomCellsValues.DOOR) {
             return true;
-        }else{
+        }else {
             return false;
         }
     }
 
     @Override
-    public Optional<Enigma> enterEnigma(final Position posEnigma){
+    public Optional<Enigma> enterEnigma(final Position posEnigma) {
         if(this.currentRoom.getCellContent(posEnigma) == RoomCellsValues.ENIGMA) {
             return Optional.of(this.currentRoom.getEnigma(posEnigma));
         } else {
@@ -91,19 +92,19 @@ public class RoomManagerImpl implements RoomManager, java.io.Serializable {
     }
 
     @Override
-    public void enterDoor(final Position posDoor, final List<Room> rooms){ 
+    public void enterDoor(final Position posDoor, final List<Room> rooms) { 
         if(this.currentRoom.getCellContent(posDoor) == RoomCellsValues.DOOR) {
             
             // 1. La porta è aperta?
-            if(this.currentRoom.getDoor(posDoor).isOpen()){
+            if(this.currentRoom.getDoor(posDoor).isOpen()) {
                 
                 // Prendo l'ID e tolgo eventuali spazi vuoti iniziali/finali
                 String targetRoomId = this.currentRoom.getDoor(posDoor).getDstRoomId().trim();
                 Room nextRoom = null;    
                 
                 // 2. Cerco la stanza nella lista usando .equals()
-                for(Room r: rooms){
-                    if(targetRoomId.equals(r.getId().trim())){
+                for(Room r: rooms) {
+                    if(targetRoomId.equals(r.getId().trim())) {
                         nextRoom = r; 
                         break;
                     }
