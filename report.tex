@@ -83,7 +83,7 @@ La View si occupa esclusivamente dei meccanismi di cattura dell’input e visual
     \centering
     \includegraphics[width=1.2\linewidth]{img/uml_player.png}
     \caption{}
-    \label{fig:placeholder}
+    \label{fig:placeholder1}
 \end{figure}
 Problema: deve essere possibile che il RoomManager gestisca le collisioni che il player ha con gli elementi presenti nella mappa, governando così le conseguenze che ogni interazione genera.\newline
 Soluzione: il RoomManager implementa metodi di controllo sul tipo di collisione che sta avvenendo, comunicando al player come comportarsi. Tramite il player, il Room manager riesce anche a comunicare con l'Inventario, permettendone la gestione di esso.
@@ -100,7 +100,7 @@ Alternative: \newline
     \centering
     \includegraphics[width=1.2\linewidth]{img/uml_inventory.png}
     \caption{}
-    \label{fig:placeholder}
+    \label{fig:placeholder2}
 \end{figure}
 Problema: Aggiornare lo stato dell’inventario nel momento in cui viene trovata una chiave e, simultaneamente, sbloccare la porta corrispondente. \newline \newline
 Soluzione: All'interno della classe Enigma è presente un metodo solve(). Quando l'utente fornisce la risposta corretta, solve() attiva due processi:\newline
@@ -144,7 +144,7 @@ Soluzione: creazione di un template comune a tutti gli enigmi che gestisce le op
     \includegraphics[width=0.8\linewidth]
     {img/GameEngine}
     \caption{Rappresentazione UML del game engine e gestione dei periodi tra frame}
-    \label{fig:placeholder}
+    \label{fig:placeholder3}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,7 +164,7 @@ Soluzione: creazione di un template comune a tutti gli enigmi che gestisce le op
     \includegraphics[width=1.2\linewidth]{img/uml_command.png}
     \caption{Problema: Nel sistema è necessario gestire diverse azioni (comandi) che il controller deve poter eseguire in risposta all’input dell’utente. Nel nostro caso, l’interazione avviene tramite tastiera per il movimento del giocatore, che deve attivarsi alla pressione di un tasto (le quattro frecce direzionali) e interrompersi al rilascio dello stesso.\\\\ Soluzione: La soluzione adottata sfrutta la gestione degli eventi: la View, basata su Swing, intercetta la pressione e il rilascio dei tasti e delega l’azione al Controller. Quest’ultimo traduce l’evento in un oggetto che implementa l’interfaccia Command e lo registra tramite il metodo catchCommand(). Il comando viene successivamente eseguito tramite il metodo execute() all’interno del metodo run() del GameEngine, che agisce sul GameModel modificandone lo stato in modo coerente con l’input ricevuto.
 }
-    \label{fig:placeholder}
+    \label{fig:placeholder4}
 \end{figure}
 
 \begin{figure}[H]
@@ -172,7 +172,7 @@ Soluzione: creazione di un template comune a tutti gli enigmi che gestisce le op
     \includegraphics[width=1.2\linewidth]{img/uml_save.png}
     \caption{Problema: Nel sistema è necessario prevedere un meccanismo di salvataggio e caricamento dello stato del modello (RoomManager). \\\\ Soluzione: La soluzione adottata consiste nell’introduzione di una classe statica RoomManagerStorage, responsabile esclusivamente della persistenza dello stato del RoomManager. Essa fornisce un metodo save(), utilizzato dal metodo enterNextDoor() di RoomManager per salvare automaticamente il gioco a ogni cambio di stanza, e un metodo load(), invocato dal main all’avvio dell’applicazione per ripristinare l’ultimo stato salvato, qualora disponibile.
 }
-    \label{fig:placeholder}
+    \label{fig:placeholder5}
 \end{figure}
 
 \begin{figure}[H]
@@ -180,7 +180,7 @@ Soluzione: creazione di un template comune a tutti gli enigmi che gestisce le op
     \includegraphics[width=1.2\linewidth]{img/uml_view.png}
     \caption{Problema: Nel sistema sorge la necessità di rendere la logica di visualizzazione intercambiabile e indipendente dall'implementazione tecnologica specifica (es. Java Swing). \\\\ Soluzione: Per massimizzare la modularità e favorire l'indipendenza tecnologica, è stata introdotta l'interfaccia View, che definisce un contratto comune basato sui metodi UpdateView e SetController. L'implementazione concreta è affidata alla classe GameFrame, che realizza l'interfaccia fungendo da contenitore principale. La struttura interna segue un principio di composizione, GamePanel: gestisce la resa grafica del gioco e l'interazione con l'utente. Invece InventoryPanel: si occupa specificamente della visualizzazione dell'inventario. Questa architettura permette di sostituire l'intero blocco grafico (ad esempio passando da Swing a JavaFX) semplicemente creando una nuova classe che implementi View, senza dover modificare il controller.
 }
-    \label{fig:placeholder}
+    \label{fig:placeholder6}
 \end{figure}
 
 \newpage
